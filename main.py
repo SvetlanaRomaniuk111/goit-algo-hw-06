@@ -35,18 +35,13 @@ class Record:
                 self.phones.remove(p)
                
     def edit_phone(self, old_phone, new_phone):
-        # Перевірка на коректність старого номера
-        if len(old_phone) != 10 or not old_phone.isdigit():
-            raise ValueError("Old phone number must consist of 10 digits")
-        
-        # Перевірка на коректність нового номера
-        if len(new_phone) != 10 or not new_phone.isdigit():
-            raise ValueError("New phone number must consist of 10 digits")
-        
+        # Створюємо об'єкт Phone для перевірки коректності нового номера
+        new_phone_obj = Phone(new_phone)
+       
         # Редагування телефонів (Змінюємо існуючий телефон на новий)
         for p in self.phones:
             if p.value == old_phone:
-                p.value = new_phone
+                p.value = new_phone_obj.value
                 return
             
         # Якщо телефон для заміни не знайдено, виникає помилка
